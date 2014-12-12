@@ -6,7 +6,7 @@
 (def wwo-api-local "http://api.worldweatheronline.com/free/v2/weather.ashx")
 (def wwo-api-search "http://api.worldweatheronline.com/free/v2/search.ashx")
 
-(def api-key (str/trim (slurp "wwo_api_key")))
+(def api-key (str/trim (slurp "config/wwo_api_key")))
 
 (def req (http/request {:url wwo-api-local
                         :method :get
