@@ -1,4 +1,4 @@
-(ns weatherman.core.weather-fetcher
+(ns weatherman.weather-fetcher
   (:require [clojure.string :as str]
             [org.httpkit.client :as http]
             [cheshire.core :refer :all]))
