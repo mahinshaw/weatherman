@@ -1,6 +1,7 @@
 (ns weatherman.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [compojure.handler :as handler]
             [prone.middleware :as prone]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [weatherman.routes.weatherman-routes :refer [weatherman-routes]]))
@@ -11,4 +12,5 @@
 (def app
   (-> (routes weatherman-routes app-routes)
     (prone/wrap-exceptions {:app-namespaces ['weatherman.weather-fetcher]})
-    (wrap-defaults site-defaults)))
+    (handler/api)
+    (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))))

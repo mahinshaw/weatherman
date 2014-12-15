@@ -4,6 +4,9 @@
             [weatherman.weather-fetcher :as wf]
             [weatherman.views.weatherman-views :refer [main-template]]))
 
+(def locations (atom '("Greensboro NC" "Stockholm")))
+(def title "Weatherman")
+
 ;; :data then (:current_condition :request :weather)
 (defn fetch-weather [location]
   (-> location wf/local-req wf/get-resp))
@@ -21,11 +24,18 @@
 (defn get-search [location]
   (-> location fetch-search-results :search_api :result))
 
+(defn post-location [request]
+  (clojure.pprint/pprint request)
+  (let [location (get-in request [:params :location])]
+    (swap! locations conj location)
+    (response/redirect "/")))
+
 (defroutes weatherman-routes
-  (GET "/" [] (main-template "Weatherman"))
+  (GET "/" [] (main-template title @locations))
   (GET "/search/:location" [location]
        (str "<h3>Found 10 results: </h3><br/>" (get-search location)))
   (GET "/weather/:location" [location]
        (str "<h3>Welcome to " location "</h3>" "<br/>" (get-weather location)))
   (GET "/cc/:location" [location]
-       (str "<h3>Welcome to " location "</h3>" "<br/>" (get-current-condition location))))
+       (str "<h3>Welcome to " location "</h3>" "<br/>" (get-current-condition location)))
+  (POST "/new" [] post-location))
