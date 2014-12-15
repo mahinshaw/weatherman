@@ -1,7 +1,8 @@
 (ns weatherman.routes.weatherman-routes
   (:require [ring.util.response :as response]
             [compojure.core :refer [defroutes GET POST]]
-            [weatherman.weather-fetcher :as wf]))
+            [weatherman.weather-fetcher :as wf]
+            [weatherman.views.weatherman-views :refer [main-template]]))
 
 ;; :data then (:current_condition :request :weather)
 (defn fetch-weather [location]
@@ -21,7 +22,7 @@
   (-> location fetch-search-results :search_api :result))
 
 (defroutes weatherman-routes
-  (GET "/" [] "WEATHERMAN")
+  (GET "/" [] (main-template "Weatherman"))
   (GET "/search/:location" [location]
        (str "<h3>Found 10 results: </h3><br/>" (get-search location)))
   (GET "/weather/:location" [location]

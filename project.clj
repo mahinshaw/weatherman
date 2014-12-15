@@ -7,7 +7,8 @@
                  [http-kit "2.1.19"]
                  [cheshire "5.4.0"]
                  [prone "0.6.1"]
-                 [ring/ring-defaults "0.1.2"]]
+                 [ring/ring-defaults "0.1.2"]
+                 [enlive "1.1.5"]]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler weatherman.handler/app}
   :profiles
