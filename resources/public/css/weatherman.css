@@ -128,7 +128,7 @@ label {
     }
     /* We want to give the content area some more padding */
     .content {
-        padding: 0em;
+        padding: 1em;
     }
 
     /* We can align the menu header to the left, but float the

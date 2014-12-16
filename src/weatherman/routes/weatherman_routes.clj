@@ -29,8 +29,12 @@
     (swap! locations conj location)
     (response/redirect "/")))
 
+(defn return-current-conditions [locations]
+  (for [loc locations] {:location loc
+                        :current_condition (get-current-condition loc)}))
+
 (defn index [request]
-  (main-template title @locations))
+  (main-template title (return-current-conditions @locations)))
 
 (defroutes weatherman-routes
   (GET "/" [] index)
