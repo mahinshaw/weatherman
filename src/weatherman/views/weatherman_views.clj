@@ -12,16 +12,7 @@
   (html/at (html/html-resource "templates/location.html")
            [:div.location] (html/clone-for [loc locations] (html/content (location-template loc)))))
 
-(html/defsnippet locations-template "templates/locations.html"
-  [:body :div.content-wrapper]
-  [locations]
-  [:div.locations] (html/append (show-locations locations)))
-
-(html/defsnippet nav-header "templates/header.html"
-  [:body :div.header]
-  [title]
-  [:div.home-menu :a.header-title] (html/content title)) 
-
 (html/deftemplate main-template "templates/main.html" [title locations]
   [:head :title] (html/content title)
-  [:body] (html/append (locations-template locations)))
+  [:body :div.content-wrapper :div.locations] (html/append (show-locations locations))
+  )

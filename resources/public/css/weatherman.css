@@ -128,7 +128,7 @@ label {
     }
     /* We want to give the content area some more padding */
     .content {
-        padding: 1em;
+        padding: 0em;
     }
 
     /* We can align the menu header to the left, but float the
@@ -136,9 +136,10 @@ label {
     .home-menu {
         text-align: left;
     }
-    .home-menu ul {
-        float: right;
-    }
+    /* For some reason this is not working in chrome.  The list floats down and right. */
+    /* .home-menu ul { */
+    /*     float: right; */
+    /* } */
 
 
     /* We remove the border-separator assigned to .l-box-lrg */
