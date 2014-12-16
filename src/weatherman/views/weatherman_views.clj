@@ -4,7 +4,7 @@
 (html/defsnippet locations-template "templates/locations.html"
   [:body :div.content-wrapper]
   [locations]
-  [:div.locations] (html/content (str (apply str locations))))
+  [:div.locations] (html/append (str "<p>" (apply str (interpose "<br>" locations)))))
 
 (html/defsnippet nav-header "templates/header.html"
   [:body :div.header]

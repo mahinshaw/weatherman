@@ -25,13 +25,15 @@
   (-> location fetch-search-results :search_api :result))
 
 (defn post-location [request]
-  (clojure.pprint/pprint request)
   (let [location (get-in request [:params :location])]
     (swap! locations conj location)
     (response/redirect "/")))
 
+(defn index [request]
+  (main-template title @locations))
+
 (defroutes weatherman-routes
-  (GET "/" [] (main-template title @locations))
+  (GET "/" [] index)
   (GET "/search/:location" [location]
        (str "<h3>Found 10 results: </h3><br/>" (get-search location)))
   (GET "/weather/:location" [location]
