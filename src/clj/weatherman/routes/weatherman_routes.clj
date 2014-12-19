@@ -5,6 +5,10 @@
             [weatherman.views.weatherman-views :refer [main-template]]))
 
 (def locations (atom '("Greensboro NC" "Stockholm")))
+(def location-map
+  "A location map should have the following structure:
+{: "
+  (atom {}))
 (def title "Weatherman")
 
 ;; :data then (:current_condition :request :weather)
@@ -35,6 +39,19 @@
 
 (defn index [request]
   (main-template title (return-current-conditions @locations)))
+
+(defn search-location [location]
+  "Use search api to find a location."
+  (let [search-results (get-search location)
+        results-count (count search-results)]
+    (cond (= results-count 0) (response/redirect "/")
+          (= results-count 1) ()
+          :else ())))
+
+(defn add-location [location]
+  "Add a location to the location map"
+  (let [])
+  )
 
 (defroutes weatherman-routes
   (GET "/" [] index)

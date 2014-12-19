@@ -39,3 +39,13 @@
   "Take a request and return the body as a hash-map"
   (when-let [resp request]
     (parse-string (:body @resp) true)))
+
+(defn weather-aggregator
+  "For the needs of this app, wwo provides less information that desirable. This func aggregates the resp.
+The map will look like the following:
+{:"
+  ([location] (->> "7" (weather-aggregator location)))
+  ([location days]
+   (let [resp-body (-> location (local-req days) get-resp)]
+     )))
+
